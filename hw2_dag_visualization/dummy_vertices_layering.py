@@ -73,4 +73,4 @@ def dummy_vertices_layering(graph):
         for layer_number in range(np.max(layers_distribution) + 1)
     ]
 
-    return layering
+    return list(reversed(layering))

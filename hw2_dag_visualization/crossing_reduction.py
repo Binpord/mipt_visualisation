@@ -3,13 +3,11 @@ import itertools
 import numpy as np
 
 
-def tripletwise(iterable):
-    # Based on pairwise from itertools documentation.
-    a, b, c = itertools.tee(iterable, 3)
+def pairwise(iterable):
+    # Taken from itertools documentation.
+    a, b = itertools.tee(iterable, 2)
     next(b, None)
-    next(c, None)
-    next(c, None)
-    return zip(a, b, c)
+    return zip(a, b)
 
 
 def common_nodes_indices(nodes, layer):
@@ -52,16 +50,18 @@ def local_search(layer_ordering, graph, reversed_order=False):
 
     # Iterate over triplets of layers and choose middle layer permutation
     # based on number of crossings of edges between layers.
-    triplets = tripletwise(
-        layer_ordering if not reversed_order else reversed(layer_ordering)
+    layer_pairs = pairwise(
+        layer_ordering[1:] if not reversed_order else reversed(layer_ordering[:-1])
     )
-    for prev_layer, curr_layer, next_layer in triplets:
-        _, best_permutation = min(
-            (
-                count_crossings(prev_layer, permutation, next_layer, graph),
-                permutation,
-            )
-            for permutation in itertools.permutations(curr_layer)
+    for curr_layer, next_layer in layer_pairs:
+        prev_layer = new_ordering[-1]
+        best_permutation = min(
+            itertools.permutations(curr_layer),
+            key=lambda permutation: (
+                count_crossings(prev_layer, permutation, next_layer, graph)
+                if not reversed_order
+                else count_crossings(next_layer, curr_layer, prev_layer, graph)
+            ),
         )
         new_ordering.append(best_permutation)
 
@@ -76,18 +76,18 @@ def median_layer_ordering(layering, graph):
 
     # For every consequent layer choose ordering based
     # on median of nodes' predecessors in previous layer.
-    for new_layer in layering[1:]:
+    for curr_layer in layering[1:]:
         prev_layer = layer_ordering[-1]
         predecessors_indices = {
             node: common_nodes_indices(graph.predecessors(node), prev_layer)
-            for node in new_layer
+            for node in curr_layer
         }
         predecessors_medians = {
             node: np.median(indices) if indices else float("inf")
             for node, indices in predecessors_indices.items()
         }
         layer_ordering.append(
-            list(sorted(new_layer, key=lambda node: predecessors_medians[node]))
+            list(sorted(curr_layer, key=lambda node: predecessors_medians[node]))
         )
 
     return layer_ordering

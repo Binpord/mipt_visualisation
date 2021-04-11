@@ -97,7 +97,7 @@ def assign_layers(graph, labels, max_width):
         layering[-1].add(node)
         used_nodes.add(node)
 
-    return layering
+    return list(reversed(layering))
 
 
 def coffman_graham_layering(graph, max_width):
