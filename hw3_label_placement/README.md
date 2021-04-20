@@ -5,3 +5,5 @@
 Resulting image for a sample case:
 
 ![example visualization](example.png "Example visualization")
+
+All code is written by [me](https://github.com/Binpord). My name is Shiianov Vadim and I am student at [MIPT](https://mipt.ru) and [Yandex Data School](https://yandexdataschool.ru/).

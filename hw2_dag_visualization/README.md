@@ -8,3 +8,5 @@ Results of my method:
 
 ![example 1](example1.png "Example 1")
 ![example 2](example2.png "Example 2")
+
+All code is written by [me](https://github.com/Binpord). My name is Shiianov Vadim and I am student at [MIPT](https://mipt.ru) and [Yandex Data School](https://yandexdataschool.ru/).

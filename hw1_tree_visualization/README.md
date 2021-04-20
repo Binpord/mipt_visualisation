@@ -9,3 +9,5 @@ Notebook displays example graph. GraphML xml file for this graph is also availab
 My method produces:
 
 ![my visualization](tree-example-vis.png "My Visualization")
+
+All code is written by [me](https://github.com/Binpord). My name is Shiianov Vadim and I am student at [MIPT](https://mipt.ru) and [Yandex Data School](https://yandexdataschool.ru/).
