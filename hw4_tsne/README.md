@@ -1,6 +1,8 @@
 # t-SNE
 
-My realization of [t-SNE visualization algorithm](https://lvdmaaten.github.io/tsne/). Right now it happens to have a bug, I cannot find, that is why it does not seem to do anything meaningful. However KL-divergence between input points distribution and the output points distribution decreases steadily during the gradient descent process. Current result of my algorithm on the MNIST is as follows:
+My realization of [t-SNE visualization algorithm](https://lvdmaaten.github.io/tsne/). Example of usage is available at `tsne.ipynb` ([open in Google Colab](https://colab.research.google.com/github/Binpord/mipt_visualisation/blob/main/hw4_tsne/tsne.ipynb))
+
+Right now it happens to have a bug, I cannot find, that is why it does not seem to do anything meaningful. However KL-divergence between input points distribution and the output points distribution decreases steadily during the gradient descent process. Current result of my algorithm on the MNIST is as follows:
 
 ![mnist visualization](tsne.png)
 
